@@ -1,14 +1,18 @@
-package com.felipemoreira.financemanagement.services;
+package com.felipemoreira.financemanagement.persons.services;
 
-import com.felipemoreira.financemanagement.domain.dtos.MessageDTO;
-import com.felipemoreira.financemanagement.domain.dtos.PersonDTO;
-import com.felipemoreira.financemanagement.domain.exceptions.PersonAlreadyExistsException;
-import com.felipemoreira.financemanagement.domain.mappers.PersonMapper;
-import com.felipemoreira.financemanagement.entities.Person;
-import com.felipemoreira.financemanagement.repositories.PersonRepository;
+import com.felipemoreira.financemanagement.persons.domain.dtos.MessageDTO;
+import com.felipemoreira.financemanagement.persons.domain.dtos.PersonDTO;
+import com.felipemoreira.financemanagement.persons.domain.exceptions.PersonAlreadyExistsException;
+import com.felipemoreira.financemanagement.persons.domain.exceptions.PersonNotFoundException;
+import com.felipemoreira.financemanagement.persons.domain.mappers.PersonMapper;
+import com.felipemoreira.financemanagement.persons.entities.Person;
+import com.felipemoreira.financemanagement.persons.repositories.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -26,7 +30,7 @@ public class PersonService {
     }
 
     public MessageDTO updatePerson(Long id, PersonDTO personDTO) {
-        Person encontraPerson = verifyAndGetIfExists(personDTO.getPersonID());
+        Person encontraPerson = verifyAndGetIfExists(id);
 
         personDTO.setPersonID(id);
         Person personToUpdate = PERSON_MAPPER.dtoToEntity(personDTO);
@@ -39,6 +43,20 @@ public class PersonService {
         return updateMessage(updatedPerson);
     }
 
+    public PersonDTO findByName(String namePerson) {
+        Person person = personRepository.findByPersonName(namePerson)
+                .orElseThrow(() -> new PersonNotFoundException(namePerson));
+
+        return PERSON_MAPPER.entityToDTO(person);
+    }
+
+    public List<PersonDTO> findAll() {
+        return personRepository.findAll()
+                .stream()
+                .map(PERSON_MAPPER::entityToDTO)
+                .collect(Collectors.toList());
+    }
+
     public void deletePerson(Long id) {
         verifyAndGetIfExists(id);
         personRepository.deleteById(id);
@@ -46,9 +64,7 @@ public class PersonService {
 
     private Person verifyAndGetIfExists(Long id) {
          return personRepository.findById(id)
-             .orElseThrow(() -> {
-                 throw new PersonAlreadyExistsException(id);
-             });
+             .orElseThrow(() -> new PersonAlreadyExistsException(id));
     }
 
     private void verifyIfExists(PersonDTO personDTO) {

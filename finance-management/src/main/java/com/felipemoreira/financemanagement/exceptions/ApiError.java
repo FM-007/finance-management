@@ -1,4 +1,4 @@
-package com.felipemoreira.financemanagement.domain.exceptions;
+package com.felipemoreira.financemanagement.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

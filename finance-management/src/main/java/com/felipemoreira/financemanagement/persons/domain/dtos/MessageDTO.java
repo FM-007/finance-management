@@ -1,4 +1,4 @@
-package com.felipemoreira.financemanagement.domain.dtos;
+package com.felipemoreira.financemanagement.persons.domain.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

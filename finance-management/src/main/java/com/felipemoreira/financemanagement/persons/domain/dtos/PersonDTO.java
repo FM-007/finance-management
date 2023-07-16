@@ -1,4 +1,4 @@
-package com.felipemoreira.financemanagement.domain.dtos;
+package com.felipemoreira.financemanagement.persons.domain.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

@@ -1,5 +1,6 @@
-package com.felipemoreira.financemanagement.domain.exceptions;
+package com.felipemoreira.financemanagement.exceptions;
 
+import com.felipemoreira.financemanagement.exceptions.ApiError;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

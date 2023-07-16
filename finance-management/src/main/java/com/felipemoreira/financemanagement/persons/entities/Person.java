@@ -1,5 +1,6 @@
-package com.felipemoreira.financemanagement.entities;
+package com.felipemoreira.financemanagement.persons.entities;
 
+import com.felipemoreira.financemanagement.entities.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;

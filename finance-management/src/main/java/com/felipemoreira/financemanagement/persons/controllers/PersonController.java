@@ -1,20 +1,32 @@
-package com.felipemoreira.financemanagement.controllers;
+package com.felipemoreira.financemanagement.persons.controllers;
 
-import com.felipemoreira.financemanagement.domain.dtos.MessageDTO;
-import com.felipemoreira.financemanagement.domain.dtos.PersonDTO;
-import com.felipemoreira.financemanagement.services.PersonService;
+import com.felipemoreira.financemanagement.persons.domain.dtos.MessageDTO;
+import com.felipemoreira.financemanagement.persons.domain.dtos.PersonDTO;
+import com.felipemoreira.financemanagement.persons.services.PersonService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/v1/pessoas")
+@RequestMapping("/api/v1/persons")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
     private PersonService personService;
+
+    @GetMapping("/{name}")
+    public PersonDTO findByName(@PathVariable String name) {
+        return personService.findByName(name);
+    }
+
+    @GetMapping
+    public List<PersonDTO> findAll() {
+        return personService.findAll();
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

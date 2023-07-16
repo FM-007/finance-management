@@ -1,4 +1,4 @@
-package com.felipemoreira.financemanagement.domain.exceptions;
+package com.felipemoreira.financemanagement.persons.domain.exceptions;
 
 import jakarta.persistence.EntityExistsException;
 
