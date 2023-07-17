@@ -1,5 +1,6 @@
 package com.felipemoreira.financemanagement.persons.controllers;
 
+import com.felipemoreira.financemanagement.persons.controllers.docs.PersonControllerDocs;
 import com.felipemoreira.financemanagement.persons.domain.dtos.MessageDTO;
 import com.felipemoreira.financemanagement.persons.domain.dtos.PersonDTO;
 import com.felipemoreira.financemanagement.persons.services.PersonService;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/persons")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class PersonController {
+public class PersonController implements PersonControllerDocs {
 
     private PersonService personService;
 
